@@ -11,7 +11,7 @@ group_defaults:
     enabled: true
 groups:
   master-review:
-  required: 1
+    required: 1
     author_approval:
       auto: true
     teams:
