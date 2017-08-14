@@ -1,15 +1,25 @@
 version: 2
+group_defaults:
+  approve_by_comment:
+    enabled: true
+    approve_regex: '^([A|a]pproved|:+1:|:thumbsup:)'
+    reject_regex: '^([R|r]ejected|:-1:|:thumbsdown:)'
+  reject_value: -100 # any rejection means a failure
+  reset_on_push:
+    enabled: true
+  reset_on_reopened:
+    enabled: true
 groups:
-  code-review:
-    approve_by_comment:
-      enabled: true
-      approve_regex: '^([A|a]pproved|:+1:|:thumbsup:)'
-      reject_regex: '^([R|r]ejected|:-1:|:thumbsdown:)'    
-    required: 1
-    reset_on_push:
-      enabled: false
+  master-review:
+  required: 1
     author_approval:
       auto: true
+    teams:
+      - verilywrite
+      - broadwrite
+    conditions:
+      branches:
+        - master
   pullapprove-admins:
     required: 1
     author_approval:
