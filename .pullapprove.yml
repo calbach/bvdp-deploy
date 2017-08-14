@@ -2,11 +2,20 @@ version: 2
 groups:
   code-review:
     approve_by_comment:
-      approve_regex: ^Approved
       enabled: true
-      reject_regex: ^Rejected
+      approve_regex: '^([A|a]pproved|:+1:|:thumbsup:)'
+      reject_regex: '^([R|r]ejected|:-1:|:thumbsdown:)'    
     required: 1
     reset_on_push:
       enabled: false
-    users:
-    - davidbernick
+    author_approval:
+      auto: true
+  pullapprove-admins:
+    required: 1
+    author_approval:
+      ignored: true 
+    conditions:
+      files:
+        - ".pullapprove.yml"
+    teams:
+      - bv-devops
