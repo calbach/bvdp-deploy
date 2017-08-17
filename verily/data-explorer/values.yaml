@@ -1,0 +1,17 @@
+replicaCount: 1
+dataExplorer:
+  internalPort: 8080
+  image:
+    repository: gcr.io/bvdp-verily-dev/data-explorer-service
+    tag: latest
+esp:
+  externalPort: 80
+  internalPort: 8081
+  serviceName: ""
+  serviceConfigId: ""
+  image:
+    repository: gcr.io/endpoints-release/endpoints-runtime
+    tag: 1
+elastic:
+  hostPort: ""
+resources: {}

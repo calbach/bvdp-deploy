@@ -1,0 +1,3 @@
+[submodule "data-explorer-service"]
+	path = data-explorer-service
+	url = https://github.com/bvprivate/data-explorer-service

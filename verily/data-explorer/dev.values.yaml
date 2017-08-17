@@ -1,0 +1,5 @@
+esp:
+  serviceName: data-explorer.endpoints.bvdp-verily-dev.cloud.goog
+  serviceConfigId: 2017-08-17r1
+elastic:
+  hostPort: http://es-dev-elasticsearch-client:9200

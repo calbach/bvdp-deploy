@@ -1,0 +1,4 @@
+# See https://github.com/kubernetes/charts/blob/master/incubator/elasticsearch/values.yaml
+
+data:
+  storage: "100Gi"
