@@ -397,8 +397,5 @@ tags:
 - name: Datasets
 - name: Individuals
 - name: DataPointers
-host: data-explorer.endpoints.bvdp-verily-dev.cloud.goog
+host: explorer-api-dot-bvdp-verily-dev.appspot.com
 x-google-allow: all
-x-google-endpoints:
-- name: data-explorer.endpoints.bvdp-verily-dev.cloud.goog
-  target: 35.196.113.1

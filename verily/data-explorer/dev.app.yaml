@@ -1,0 +1,9 @@
+runtime: custom
+env: flex
+entrypoint: gunicorn -b ":$PORT" data_index.__main__:app
+env_variables:
+  INDEX_ADDR: http://10.128.0.9:9200
+service: explorer-api
+endpoints_api_service:
+  name: explorer-api-dot-bvdp-verily-dev.appspot.com
+  config_id: 2017-08-23r0

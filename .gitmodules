@@ -1,3 +1,6 @@
 [submodule "data-explorer-service"]
 	path = data-explorer-service
 	url = https://github.com/bvprivate/data-explorer-service
+[submodule "helm-elasticsearch"]
+	path = helm-elasticsearch
+	url = https://github.com/bvprivate/helm-elasticsearch

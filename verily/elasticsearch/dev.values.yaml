@@ -1,4 +1,8 @@
-# See https://github.com/kubernetes/charts/blob/master/incubator/elasticsearch/values.yaml
+# See https://github.com/clockworksoul/helm-elasticsearch/blob/master/values.yaml
+service:
+  type: LoadBalancer
+  annotations:
+    cloud.google.com/load-balancer-type: "internal"
 
 data:
-  storage: "100Gi"
+  storage: 100Gi

@@ -29,8 +29,10 @@ The Helm release name is "es-dev".
 ### Upgrade
 
 ```
-gcloud container clusters get-credential bvdp-dev --zone us-east1-b --project bvdp-verily-dev
-helm upgrade es-dev incubator/elasticsearch --version 0.1.8 --values dev.values.yaml --kube-context $(kubectl config current-context)
+CHART_DIR="$(git rev-parse --show-toplevel)/helm-elasticsearch"
+
+gcloud container clusters get-credentials bvdp-dev --zone us-central1-b --project bvdp-verily-dev
+helm upgrade es-dev "${CHART_DIR}" --values dev.values.yaml --kube-context $(kubectl config current-context)
 ```
 
 # Setup and new environments
@@ -42,6 +44,8 @@ See [initial k8s setup](../k8s/README.md), including kubectl configuration.
 Create a new values yaml file, see [dev.values.yaml](./dev.values.yaml)
 
 ```
+CHART_DIR="$(git rev-parse --show-toplevel)/helm-elasticsearch"
+
 helm init
-helm install incubator/elasticsearch --version 0.1.8 --name RELEASE_NAME --values VALUES_FILE --kube-context $(kubectl config current-context)
+helm install "${CHART_DIR}" --name RELEASE_NAME --values VALUES_FILE --kube-context $(kubectl config current-context)
 ```

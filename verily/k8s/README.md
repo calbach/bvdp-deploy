@@ -24,8 +24,15 @@ example cluster. Must have installed:
 
 ## Create a new k8s cluster
 
+Notes:
+- If you've already enabled App Engine in this cloud project, be sure to
+collocate the GKE cluster in the same region.
+- Version >= 1.7.2 is required as it is a prerequisite for using internal load
+  balancers.
+- Must have at least 4 nodes
+
 ```
-gcloud container clusters create ${CLUSTER_NAME}
+gcloud container clusters create ${CLUSTER_NAME} --zone ${CLUSTER_ZONE} --project ${PROJECT} --cluster-version 1.7.3 --num-nodes 4
 ```
 
 # Configuring kubectl
