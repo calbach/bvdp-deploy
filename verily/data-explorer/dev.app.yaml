@@ -3,7 +3,10 @@ env: flex
 entrypoint: gunicorn -b ":$PORT" data_index.__main__:app
 env_variables:
   INDEX_ADDR: http://10.128.0.9:9200
+  ENABLE_OAUTH2: 1
+  OAUTH2_AUDIENCES: explorer-api-dot-bvdp-verily-dev.appspot.com,488108584931-593rh8vjfb4u6mnnad0njeoo6n0jq5au.apps.googleusercontent.com,488108584931-2upn8nthuj5n1960iqtr5hilsqqrl5um.apps.googleusercontent.com
+  OAUTH2_DOMAIN_WHITELIST: google.com
 service: explorer-api
 endpoints_api_service:
   name: explorer-api-dot-bvdp-verily-dev.appspot.com
-  config_id: 2017-08-23r0
+  config_id: 2017-09-08r3

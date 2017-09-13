@@ -21,3 +21,21 @@ readonly host="explorer-api-dot-${project}.appspot.com"
 cp "${git_root}/data-explorer-service/api/index.swagger.yaml" "${out}"
 yaml w -i ${out} host "${host}"
 yaml w -i ${out} x-google-allow all
+
+# Configure/require oauth for Cloud Endpoints.
+yaml w -i ${out} securityDefinitions.google_id_token.authorizationUrl ""
+yaml w -i ${out} securityDefinitions.google_id_token.flow "implicit"
+yaml w -i ${out} securityDefinitions.google_id_token.type "oauth2"
+yaml w -i ${out} securityDefinitions.google_id_token.x-google-issuer "https://accounts.google.com"
+
+# For both values, audiences are a single comma-delimited string. Copy it over
+# to avoid having to duplicate this verbose list.
+readonly aud=$(yaml r "${git_root}/verily/data-explorer/dev.app.yaml" env_variables.OAUTH2_AUDIENCES)
+yaml w -i ${out} "securityDefinitions.google_id_token.x-google-audiences" "${aud}"
+
+# Manual for now: https://github.com/mikefarah/yaml/issues/21
+cat >> ${out} << EOF
+
+security:
+  - google_id_token: []
+EOF

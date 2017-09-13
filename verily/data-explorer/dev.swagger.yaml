@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  title: Curated Data Index
+  title: Data Explorer Service
   description: |
     API for indexing curated datasets with user-defined labels, and searching
     that index.
@@ -399,3 +399,12 @@ tags:
 - name: DataPointers
 host: explorer-api-dot-bvdp-verily-dev.appspot.com
 x-google-allow: all
+securityDefinitions:
+  google_id_token:
+    authorizationUrl: ""
+    flow: implicit
+    type: oauth2
+    x-google-issuer: https://accounts.google.com
+    x-google-audiences: "explorer-api-dot-bvdp-verily-dev.appspot.com,488108584931-593rh8vjfb4u6mnnad0njeoo6n0jq5au.apps.googleusercontent.com,488108584931-2upn8nthuj5n1960iqtr5hilsqqrl5um.apps.googleusercontent.com"
+security:
+  - google_id_token: []
