@@ -4,3 +4,6 @@
 [submodule "helm-elasticsearch"]
 	path = helm-elasticsearch
 	url = https://github.com/bvprivate/helm-elasticsearch
+[submodule "job-monitor"]
+	path = job-monitor
+	url = https://github.com/bvprivate/job-monitor
