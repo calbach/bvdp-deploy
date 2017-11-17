@@ -1,9 +1,9 @@
 [submodule "data-explorer-service"]
 	path = data-explorer-service
-	url = https://github.com/bvprivate/data-explorer-service
+	url = git@github.com:bvprivate/data-explorer-service.git
 [submodule "helm-elasticsearch"]
 	path = helm-elasticsearch
-	url = https://github.com/bvprivate/helm-elasticsearch
+	url = git@github.com:bvprivate/helm-elasticsearch.git
 [submodule "job-monitor"]
 	path = job-monitor
-	url = https://github.com/bvprivate/job-monitor
+	url = git@github.com:bvprivate/job-monitor.git
