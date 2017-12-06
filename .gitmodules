@@ -4,6 +4,6 @@
 [submodule "helm-elasticsearch"]
 	path = helm-elasticsearch
 	url = git@github.com:bvprivate/helm-elasticsearch.git
-[submodule "job-monitor"]
-	path = job-monitor
-	url = git@github.com:bvprivate/job-monitor.git
+[submodule "job-manager"]
+	path = job-manager
+	url = git@github.com:DataBiosphere/job-manager.git

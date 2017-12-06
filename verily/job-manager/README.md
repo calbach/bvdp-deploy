@@ -1,6 +1,6 @@
-# Job Monitor
+# Job Manager
 
-Config/docs for Verily's internal BVDP job monitor usage.
+Config/docs for Verily's internal BVDP job manager usage.
 
 The deployment contains two app engine services, the UI and API. The API is a
 light-weight flask server which wraps the dsub library and implements the common
@@ -35,11 +35,11 @@ soon.
 
     ```
     # Copy environment.dev.ts into the submodule
-    cp "$(git rev-parse --show-toplevel)/verily/job-monitor/environment.dev.ts" "$(git rev-parse --show-toplevel)/job-monitor/ui/src/environments/environment.prod.ts"
+    cp "$(git rev-parse --show-toplevel)/verily/job-manager/environment.dev.ts" "$(git rev-parse --show-toplevel)/job-manager/ui/src/environments/environment.prod.ts"
     # Build the container
-    gcloud container builds submit --project bvdp-verily-dev --tag gcr.io/bvdp-verily-dev/jm-dsub-ui "$(git rev-parse --show-toplevel)/job-monitor/ui"
+    gcloud container builds submit --project bvdp-verily-dev --tag gcr.io/bvdp-verily-dev/jm-dsub-ui "$(git rev-parse --show-toplevel)/job-manager/ui"
     # Reset submodule state
-    pushd $(git rev-parse --show-toplevel)/job-monitor
+    pushd $(git rev-parse --show-toplevel)/job-manager
     git reset --hard HEAD
     popd
     ```
@@ -47,7 +47,7 @@ soon.
 1. **API**: Build container for the `dsub` server:
 
     ```
-    gcloud container builds submit --project bvdp-verily-dev --tag gcr.io/bvdp-verily-dev/jm-dsub-api "$(git rev-parse --show-toplevel)/job-monitor/servers/dsub"
+    gcloud container builds submit --project bvdp-verily-dev --tag gcr.io/bvdp-verily-dev/jm-dsub-api "$(git rev-parse --show-toplevel)/job-manager/servers/dsub"
     ```
 
 #### TODO:
@@ -58,8 +58,8 @@ soon.
 
 Push flags and new images:
 ```
-gcloud app deploy $(git rev-parse --show-toplevel)/verily/job-monitor/ui-dev.app.yaml --image-url gcr.io/bvdp-verily-dev/jm-dsub-ui --project bvdp-verily-dev
-gcloud app deploy $(git rev-parse --show-toplevel)/verily/job-monitor/api-dev.app.yaml --image-url gcr.io/bvdp-verily-dev/jm-dsub-api --project bvdp-verily-dev
+gcloud app deploy $(git rev-parse --show-toplevel)/verily/job-manager/ui-dev.app.yaml --image-url gcr.io/bvdp-verily-dev/jm-dsub-ui --project bvdp-verily-dev
+gcloud app deploy $(git rev-parse --show-toplevel)/verily/job-manager/api-dev.app.yaml --image-url gcr.io/bvdp-verily-dev/jm-dsub-api --project bvdp-verily-dev
 ```
 
 Note: it may be faster to specify an existing --version. Retrieve the active
