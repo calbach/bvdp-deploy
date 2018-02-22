@@ -37,7 +37,7 @@ soon.
     # Copy environment.dev.ts into the submodule
     cp "$(git rev-parse --show-toplevel)/verily/job-manager/environment.dev.ts" "$(git rev-parse --show-toplevel)/job-manager/ui/src/environments/environment.prod.ts"
     # Build the container
-    gcloud container builds submit --project bvdp-verily-dev --config verily/job-manager/ui-config.yaml job-manager/ui
+    gcloud container builds submit --project bvdp-verily-dev --config "$(git rev-parse --show-toplevel)/verily/job-manager/ui-config.yaml" "$(git rev-parse --show-toplevel)/job-manager/ui"
     # Reset submodule state
     pushd $(git rev-parse --show-toplevel)/job-manager
     git reset --hard HEAD
@@ -47,7 +47,7 @@ soon.
 1. **API**: Build container for the `dsub` server:
 
     ```
-    gcloud container builds submit --project bvdp-verily-dev --config verily/job-manager/api-config.yaml job-manager/servers
+    gcloud container builds submit --project bvdp-verily-dev --config "$(git rev-parse --show-toplevel)/verily/job-manager/api-config.yaml" "$(git rev-parse --show-toplevel)/job-manager/servers"
     ```
 
 #### TODO:
