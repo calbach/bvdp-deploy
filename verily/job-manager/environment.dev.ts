@@ -3,4 +3,5 @@ export const environment = {
   // From GCP project bvdp-verily-dev
   clientId: '488108584931-jcdqb1s30gc8us84ksv62i10ncp9rrpb.apps.googleusercontent.com',
   production: true,
+  dashboardEnabled: false,
 };
