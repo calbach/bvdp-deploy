@@ -18,7 +18,10 @@ UI: https://jobs-ui-dot-bvdp-verily-dev.appspot.com
 
 API: https://jobs-api-dot-bvdp-verily-dev.appspot.com
 
-The GAE service names are ["jobs-ui"](https://console.cloud.google.com/appengine/versions?project=bvdp-verily-dev&serviceId=jobs-ui) and ["jobs-api"](https://console.cloud.google.com/appengine/versions?project=bvdp-verily-dev&serviceId=jobs-api).
+The GAE service names are
+["jobs-ui"](https://console.cloud.google.com/appengine/versions?project=bvdp-verily-dev&serviceId=jobs-ui), ["jobs-api"](https://console.cloud.google.com/appengine/versions?project=bvdp-verily-dev&serviceId=jobs-api),
+["jobs-ui-v2"](https://console.cloud.google.com/appengine/versions?project=bvdp-verily-dev&serviceId=jobs-ui-v2) and ["jobs-api-v2"](https://console.cloud.google.com/appengine/versions?project=bvdp-verily-dev&serviceId=jobs-api-v2).
+See [deployment](#deployment) for information on v1 vs. v2 instances.
 
 ### Rebuild
 
@@ -55,11 +58,18 @@ soon.
 - [ ] [#8](https://github.com/bvprivate/bvdp-deploy/issues/8) Reduce hackiness around environment file injection.
 
 ### Deployment
-
-Push flags and new images:
+dsub now has [preliminary support](https://github.com/DataBiosphere/dsub/issues/114)
+for the Google Genomics Pipelines v2 API, and v1 has now been deprecated. Since
+the APIs are completely distinct, there are two separate Job Manager instances
+for dsub with v1 and dsub with v2. The following commands pushes flags and
+new images for both instances:
 ```
+# Job Manager for dsub (pipelines API v1)
 gcloud app deploy $(git rev-parse --show-toplevel)/verily/job-manager/ui-dev.app.yaml --image-url gcr.io/bvdp-verily-dev/jm-dsub-ui --project bvdp-verily-dev
 gcloud app deploy $(git rev-parse --show-toplevel)/verily/job-manager/api-dev.app.yaml --image-url gcr.io/bvdp-verily-dev/jm-dsub-api --project bvdp-verily-dev
+# Job Manager fopr dsub (pipelines API v2)
+gcloud app deploy $(git rev-parse --show-toplevel)/verily/job-manager/ui-dev-v2.app.yaml --image-url gcr.io/bvdp-verily-dev/jm-dsub-ui --project bvdp-verily-dev
+gcloud app deploy $(git rev-parse --show-toplevel)/verily/job-manager/api-dev-v2.app.yaml --image-url gcr.io/bvdp-verily-dev/jm-dsub-api --project bvdp-verily-dev
 ```
 
 Note: it may be faster to specify an existing --version. Retrieve the active
@@ -67,6 +77,8 @@ version as follows:
 ```
 gcloud app services describe jobs-ui --project bvdp-verily-dev
 gcloud app services describe jobs-api --project bvdp-verily-dev
+gcloud app services describe jobs-ui-v2 --project bvdp-verily-dev
+gcloud app services describe jobs-api-v2 --project bvdp-verily-dev
 ```
 
 ## prod

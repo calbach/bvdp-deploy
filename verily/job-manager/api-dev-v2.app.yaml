@@ -1,0 +1,9 @@
+runtime: custom
+env: flex
+entrypoint: gunicorn -b ":$PORT" jobs.__main__:app
+env_variables:
+  PATH_PREFIX: /api/v1
+  PROVIDER_TYPE: google-v2
+  REQUIRES_AUTH: 1
+  ALLOW_ORIGINS: "*"
+service: jobs-api-v2
