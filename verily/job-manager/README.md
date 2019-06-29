@@ -32,25 +32,44 @@ soon.
 
     ```
     git submodule update --recursive --remote
+    (cd "$(git rev-parse --show-toplevel)/job-manager" && docker-compose -f dsub-google-compose.yml up rebuild-swagger)
     ```
 
 1. **UI**: Build container with injected environment:
 
     ```
-    # Copy environment.dev.ts into the submodule
+    # Copy override files into the submodule
     cp "$(git rev-parse --show-toplevel)/verily/job-manager/environment.dev.ts" "$(git rev-parse --show-toplevel)/job-manager/ui/src/environments/environment.prod.ts"
+    cp "$(git rev-parse --show-toplevel)/verily/job-manager/nginx.ui.dev.conf" "$(git rev-parse --show-toplevel)/job-manager/ui/nginx.prod.conf"
     # Build the container
-    gcloud container builds submit --project bvdp-verily-dev --config "$(git rev-parse --show-toplevel)/verily/job-manager/ui-config.yaml" "$(git rev-parse --show-toplevel)/job-manager/ui"
+    gcloud builds submit --project bvdp-verily-dev --config "$(git rev-parse --show-toplevel)/verily/job-manager/ui-config.yaml" "$(git rev-parse --show-toplevel)/job-manager"
     # Reset submodule state
     pushd $(git rev-parse --show-toplevel)/job-manager
     git reset --hard HEAD
     popd
     ```
 
+1. **UI V2**
+
+    ```
+    gcloud auth configure-docker
+    docker pull gcr.io/bvdp-verily-dev/jm-dsub-ui
+
+    rm -rf /tmp/deploy-dsub-ui-v2
+    docker run --rm --name dsub-ui-tmp --entrypoint '' gcr.io/bvdp-verily-dev/jm-dsub-ui sleep 1000 &
+    sleep 1
+    docker cp dsub-ui-tmp:/ui /tmp/deploy-dsub-ui-v2
+    docker kill dsub-ui-tmp
+    mkdir -p /tmp/deploy-dsub-ui-v2/dist/assets/environments
+    cp $(git rev-parse --show-toplevel)/verily/job-manager/environment.json /tmp/deploy-dsub-ui-v2/dist/assets/environments/
+    cp ui-dev-v2.app.yaml /tmp/deploy-dsub-ui-v2/app.yaml
+    (cd /tmp/deploy-dsub-ui-v2 && gcloud app deploy --project bvdp-verily-dev)
+    ```
+
 1. **API**: Build container for the `dsub` server:
 
     ```
-    gcloud container builds submit --project bvdp-verily-dev --config "$(git rev-parse --show-toplevel)/verily/job-manager/api-config.yaml" "$(git rev-parse --show-toplevel)/job-manager/servers"
+    gcloud builds submit --project bvdp-verily-dev --config "$(git rev-parse --show-toplevel)/verily/job-manager/api-config.yaml" "$(git rev-parse --show-toplevel)/job-manager"
     ```
 
 #### TODO:

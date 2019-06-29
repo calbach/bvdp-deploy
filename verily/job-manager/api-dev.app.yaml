@@ -7,3 +7,6 @@ env_variables:
   REQUIRES_AUTH: 1
   ALLOW_ORIGINS: "*"
 service: jobs-api
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 3
